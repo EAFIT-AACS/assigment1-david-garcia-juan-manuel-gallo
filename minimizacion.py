@@ -1,4 +1,4 @@
-# Función opcional para visualizar la matriz de minimización (útil para depuración)
+# Usamos una función para visualizar la matriz de minimización (útil para depuración)
 def mostrar_tabla(tabla, total_estados):
     for fila in range(total_estados):
         for col in range(fila + 1):
@@ -6,7 +6,7 @@ def mostrar_tabla(tabla, total_estados):
         print()
 
 def main():
-    # Abrir y leer el archivo de entrada
+    # Abrimos y leemos el archivo de entrada
     with open('Input.txt', 'r') as entrada:
         contenido = entrada.readlines()
 
@@ -61,19 +61,19 @@ def main():
                 destino = int(tabla_trans[i][pos + 1])
                 delta[(estado_actual, simbolo)] = destino
 
-        # Inicializar la matriz (tabla triangular inferior) para el algoritmo de minimización.
+        # Inicializamos la matriz (tabla triangular inferior) para el algoritmo de minimización.
         # Se llena inicialmente con "0" y en la diagonal se coloca el número del estado.
         tabla_min = [["0"] * n for _ in range(n)]
         for i in range(n):
             tabla_min[i][i] = str(i)
 
-        # Paso 1: Marcar con "x" aquellos pares (i,j) en que uno es estado final y el otro no.
+        # Paso 1: Marcamos con "x" aquellos pares (i,j) en que uno es estado final y el otro no.
         for i in range(1, n):
             for j in range(i):
                 if (i in finales) ^ (j in finales):
                     tabla_min[i][j] = "x"
 
-        # Paso 2: Realizar el marcado iterativo de la tabla
+        # Paso 2: Realizamos el marcado iterativo de la tabla
         cambio = True
         while cambio:
             cambio = False
