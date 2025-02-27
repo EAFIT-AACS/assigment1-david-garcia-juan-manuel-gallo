@@ -16,7 +16,7 @@
 3. **Place the input file** (e.g., `input.txt`) in the same directory as the code.
 4. **Run the program** with the following command (example for Python):
    ```bash
-   python minimize_dfa.py < input.txt
+   python minimize_dfa.py   input.txt
    
 ## 📂 Estructura del Proyecto
 1. **minimizar_dfa.py** 
