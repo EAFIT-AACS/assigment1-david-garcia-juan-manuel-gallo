@@ -1,120 +1,65 @@
-# *Equipo*
-      - David Garcia
-      - Juan Manuel Gallo
+# Minimization Algorithm
 
----
+## Team
+- Juan Manuel Gallo López
+- David Garcia 
+- Class code: 7309
 
-# Minimización de Autómatas Finitos Deterministas (DFA)
+## Development environment
+- **Operative System:** Windows 11
+- **Programming language:** Python 
+- **Tools:** Visual Studio Code
 
-## 📌 Descripción
-Este proyecto implementa el **algoritmo de minimización de un DFA** usando el método de llenado de tabla. El programa lee un archivo de entrada que describe el autómata y luego imprime, en orden lexicográfico, los pares de estados equivalentes. Se asume que los estados son números naturales y que el estado inicial siempre es `0`.
-
----
-
-# Minimización de Autómatas Finitos Deterministas (DFA)
-
-## 📌 Descripción
-Este proyecto implementa el **algoritmo de minimización de un DFA** usando el método de llenado de tabla. El programa lee un archivo de entrada que describe el autómata y luego imprime, en orden lexicográfico, los pares de estados equivalentes. Se asume que los estados son números naturales y que el estado inicial siempre es `0`.
-
----
-
+## 🛠️ How to Run the Implementation
+1. **Clone or download** this repository to your local machine.
+2. **Open a terminal** (or command prompt) in the project’s folder.
+3. **Place the input file** (e.g., `input.txt`) in the same directory as the code.
+4. **Run the program** with the following command (example for Python):
+   ```bash
+   python minimize_dfa.py < input.txt
+   
 ## 📂 Estructura del Proyecto
-mi_proyecto/
-        ─ minimizar_dfa.py  # Código fuente en Python.
-        ─ input.txt         # Archivo de entrada con la descripción del DFA
-        ─ README.md          # Esta documentación
-
-
+1. **minimizar_dfa.py** 
+2. **input.txt**       
+3. **README.md**         
 
 ---
 
-## 📥 Entrada
-El archivo de entrada debe seguir este formato:
-1. **Número de casos de prueba**  
-2. Para cada caso:
-   - Número de estados del DFA.
-   - Alfabeto (símbolos separados por espacios).
-   - Estados finales (separados por espacios).
-   - Transiciones (una línea por cada estado; cada línea contiene el estado de origen y, a continuación, el destino para cada símbolo del alfabeto, en el mismo orden).
+## 📝 Explanation of the Algorithm
+1. **Input Reading:**  
+   The test cases are extracted, which include the number of states, the alphabet, the final states, and the transition table.
 
-### Ejemplo de `input.txt`
-1 6 a b 3 4 1 2 3 4 3 5 3 4 4 5 3 4
+2. **Initialization of the Indistinguishability Table:**  
+   A lower-triangular matrix is created where each cell represents a pair of states:
+   - Each cell is initially marked with "0" (indistinguishable).
+   - The diagonal is filled with the corresponding state number.
+   - Pairs in which one state is final and the other is not are marked with "x" (since they are immediately distinguishable).
 
+3. **Iterative Process:**  
+   The matrix is traversed and, for each unmarked pair, it is checked whether, for any symbol in the alphabet, the transitions lead to a pair that is already marked. If so, the current pair is marked.
 
----
-
-## 📤 Salida
-El programa imprime en la consola los pares de estados equivalentes en **orden lexicográfico**.  
-  
-### Ejemplo de salida:
-(1,2) (3,4) (3,5) (4,5)
+4. **Determination of Equivalent States:**  
+   The pairs that remain unmarked are considered equivalent and are printed in lexicographical order.
 
 
----
+## 🎯 Example Test Cases
 
-## 🚀 Cómo Ejecutarlo
-### **Desde la Terminal**
-1. Asegúrate de tener **Python 3.x** instalado.
-2. Coloca el archivo `input.txt` en el mismo directorio que `minimizar_dfa.py`.
-3. Abre la terminal en ese directorio y ejecuta:
-python minimizar_dfa.py input.txt
-
----
-
-## 📝 Explicación del Algoritmo
-1. **Lectura de la Entrada:**  
-Se extraen los casos de prueba que incluyen el número de estados, el alfabeto, los estados finales y la tabla de transiciones.
-
-2. **Inicialización de la Tabla de Indistinguibilidad:**  
-Se crea una matriz triangular inferior donde cada celda representa un par de estados:
-- Se marca "0" (sin distinguir) en cada celda.
-- En la diagonal se pone el número del estado.
-- Se marca con "x" los pares en los que un estado es final y el otro no (ya que son inmediatamente distinguibles).
-
-3. **Proceso Iterativo:**  
-Se recorre la matriz y, para cada par sin marcar, se comprueba si, para algún símbolo del alfabeto, las transiciones conducen a un par ya marcado. Si es así, se marca el par actual.
-
-4. **Determinación de Estados Equivalentes:**  
-Los pares que permanecen sin marcar son considerados equivalentes y se imprimen en orden lexicográfico.
-
----
-
-## 🛠️ Requisitos y Herramientas
-- **Lenguaje:** Python 3.x  
-- **Editor de Código:** VSCode, PyCharm, o el de tu preferencia  
-- **Terminal o Línea de Comandos:** Para ejecutar el programa
-
----
-
-## 🎯 Ejemplos de Casos de Prueba
-
-### Caso 1
-- **Descripción:** DFA con 4 estados (0, 1, 2, 3), alfabeto `{a, b}` y estados finales `{1, 3}`.
-- **Entrada:**
+### Case 1
+- **Description:** DFA with 4 states (0, 1, 2, 3), alphabet `{a, b}`, and final states `{1, 3}`.
+- **Input:**
 1 4 a b 1 3 0 1 2 1 1 3 2 1 2 3 1 3
 
-- **Salida Esperada:**  
+- **Expected Output:**  
 (0,2) (1,3)
 
-
-### Caso 2
-- **Descripción:** DFA con 5 estados (0, 1, 2, 3, 4), alfabeto `{a, b}` y estados finales `{2, 4}`.
-- **Entrada:**
+### Case 2
+- **Description:** DFA with 5 states (0, 1, 2, 3, 4), alphabet `{a, b}`, and final states `{2, 4}`.
+- **Input:**
 1 5 a b 2 4 0 1 2 1 1 3 2 1 4 3 1 3 4 1 4
 
-- **Salida Esperada:**  
+- **Expected Output:**  
 (1,3) (2,4)
 
-
-### Ambos Casos Juntos
-Si deseas probar ambos casos en un solo archivo, el contenido de `input.txt` debe ser:
-
-2 4 a b 1 3 0 1 2 1 1 3 2 1 2 3 1 3 5 a b 2 4 0 1 2 1 1 3 2 1 4 3 1 3 4 1 4
-
-Y la salida esperada será:
-(0,2) (1,3) (1,3) (2,4)
-
----
 
 
 
